@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OnCollision : MonoBehaviour // Класс слишком большой и многофункциональный, лучше бы виделить отсюда все(?) результаты столкновений в отдельные скрипты
+public class OnCollision : MonoBehaviour // TODO: Класс слишком большой и многофункциональный, лучше бы виделить отсюда все(?) результаты столкновений в отдельные скрипты
 {
     private PointPopUp PopUp;
     private SizeChange sizeChange;
@@ -26,6 +26,7 @@ public class OnCollision : MonoBehaviour // Класс слишком больш
         else if (col.gameObject.CompareTag("pointsgiver"))
         {
             thisSceneController.ScoreGainedOnLevel.Add(/*pointsAdded =*/ 10);
+            ActiveLevelData.EnemiesOnLevel--;
             Destroy(col.gameObject);
             PopUp.OnCollision(gameObject.transform.position);
             sizeChange.ChangeSize();
@@ -34,11 +35,13 @@ public class OnCollision : MonoBehaviour // Класс слишком больш
         else if (col.gameObject.CompareTag("transparent"))
         {
             SetEffect(col.gameObject);
+            ActiveLevelData.EnemiesOnLevel--;
         }
 
         else if (col.gameObject.CompareTag("collectible"))
         {
             SceneController.diamonds++;
+            ActiveLevelData.EnemiesOnLevel--;
             Destroy(col.gameObject);
             sizeChange.ChangeSize();
         }      

@@ -8,7 +8,7 @@ public class OnPauseClick : MonoBehaviour
     void Start()
     {
         // для кнопки паузы
-        /*GameObject*/ _Button = GameObject.Find("Pause");
+        _Button = GameObject.Find("Pause");
         _Button.GetComponent<PauseButton>().PauseButtonClicked += BlockButton;
         // для интерфейса покупок
         buyWindow.BuyWindowOpen += BlockButton;
