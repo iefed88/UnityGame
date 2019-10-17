@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 494165858}
   - component: {fileID: 494165857}
   - component: {fileID: 494165859}
+  - component: {fileID: 494165860}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -241,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39e619844a25b543b1c1e4cc65c5b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerAssembler: {fileID: 494165860}
 --- !u!4 &494165858
 Transform:
   m_ObjectHideFlags: 0
@@ -268,6 +270,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneSkybox: {fileID: 2100000, guid: cc5209c8b41a7448d8d6a52c183946bc, type: 2}
+--- !u!114 &494165860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494165856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64be8c27f3263542977b232f15c49ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  LeftEye: {fileID: 0}
+  RightEye: {fileID: 0}
+  LeftFoot: {fileID: 0}
+  RightFoot: {fileID: 0}
 --- !u!1 &611058796
 GameObject:
   m_ObjectHideFlags: 0

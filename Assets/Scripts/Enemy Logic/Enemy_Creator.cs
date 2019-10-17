@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 class Enemy_Creator : EnemySpawnRandomizer 
 {
+    private const byte MaxEnemies = 30;
     // фигуры врагов для копирования
 #pragma warning disable 649
     public GameObject cube_enemy;
@@ -23,7 +24,7 @@ class Enemy_Creator : EnemySpawnRandomizer
     public static float spawnInterval;
     private float timeCount = 0;
 
-    private byte EnemyCounter = 0;
+    private byte EnemyCounter = 0; // я не очень понимаю, зачем нужна эта переменная
 
     public StepType stepType = StepType.FloatStep;
 
@@ -57,7 +58,17 @@ class Enemy_Creator : EnemySpawnRandomizer
     }
     public void Enemy_Spawner()
     {
-        Instantiate(Figure_Randomiser(), new Vector3(Position_Randomizer(positionArray), spawnPosY, 0), Quaternion.identity);     
+        if (EnemyCalculator())
+            Instantiate(Figure_Randomiser(), new Vector3(Position_Randomizer(positionArray), spawnPosY, 0), Quaternion.identity);
+    }
+    private bool EnemyCalculator()
+    {
+        if (ActiveLevelData.EnemiesOnLevel <= MaxEnemies)
+        {
+            ActiveLevelData.EnemiesOnLevel++;
+            return true;
+        }
+        else return false;
     }
 
     GameObject Figure_Randomiser()

@@ -3,11 +3,10 @@ using System.Collections;
 public class SizeChange : MonoBehaviour
 {
     // переменные для ввода в инспекторе
-    public int ResizeDuration = 1;
-    [Tooltip("Size multipler, increases size by given amount.")]
+    [SerializeField] private int ResizeDuration = 1;
+    [Tooltip("Size multiplier, increases size by given amount.")]
     [SerializeField]
     private float SizeMultiplier = 1.1f;
-    //
     private Vector3 PlayerSize;
     public void Start()
     {

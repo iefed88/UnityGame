@@ -7,6 +7,5 @@ public class TapToPlay : BaseController
         {
             SceneLoad(SceneController.LastLevel);
         }
-
     }
 }

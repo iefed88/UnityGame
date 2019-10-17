@@ -1,16 +1,16 @@
-﻿using UnityEngine;
-
-public class MenuButtonClick : BaseController
+﻿public class MenuButtonClick : BaseController
 {
-    public GameObject MenuButtonA, MenuButtonB, MenuButtonC, MenuButtonD;
+    // обрабатывает клик по кнопке меню для перехода на новую сцену
+    public ButtonsSlideY MenuButtonA, MenuButtonB, MenuButtonC; 
+    public ButtonSlideX MenuButtonD;
     public void OnMouseDown()
     {
-       string buttonName = gameObject.name;
-       SceneLoad(buttonName);
         // возврат кнопок меню в исходное положение
-       MenuButtonA.GetComponent<ButtonsSlideY>().ButtonPositionReset();
-       MenuButtonB.GetComponent<ButtonsSlideY>().ButtonPositionReset();
-       MenuButtonC.GetComponent<ButtonsSlideY>().ButtonPositionReset();
-       MenuButtonD.GetComponent<ButtonSlideX>().ButtonPositionReset();      
+        MenuButtonA.ButtonPositionReset();
+        MenuButtonB.ButtonPositionReset();
+        MenuButtonC.ButtonPositionReset();
+        MenuButtonD.ButtonPositionReset();
+        // загрузка уровня через имя кнопки
+        SceneLoad(gameObject.name);
     }
 }

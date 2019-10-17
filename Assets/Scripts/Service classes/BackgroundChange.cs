@@ -2,10 +2,9 @@
 
 public class BackgroundChange : MonoBehaviour
 {
-    public Material SceneSkybox;
+    [SerializeField] private Material SceneSkybox;
     void Start()
     {
-        Camera camera = WorldCamera._camera;
-        camera.GetComponent<Skybox>().material = SceneSkybox as Material;
+        WorldCamera._camera.GetComponent<Skybox>().material = SceneSkybox as Material;
     }
 }
