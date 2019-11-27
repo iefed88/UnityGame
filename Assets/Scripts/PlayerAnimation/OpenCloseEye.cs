@@ -8,8 +8,8 @@ public class OpenCloseEye : MonoBehaviour // открывает и закрыв�
 
     void Start()
     {
-        GameObject ClosedEye = Resources.Load<GameObject>("Forms/ClosedEye") as GameObject;
-        GameObject OpenEye = Resources.Load<GameObject>("Forms/OpenEye") as GameObject;
+        GameObject ClosedEye = Resources.Load<GameObject>("Forms/NewLeftEyeClosed") as GameObject;
+        GameObject OpenEye = Resources.Load<GameObject>("Forms/NewLeftEye") as GameObject;
 
         ClosedEyeRenderrer = ClosedEye.GetComponent<SpriteRenderer>().sprite;
         OpenEyeRenderrer = OpenEye.GetComponent<SpriteRenderer>().sprite;
