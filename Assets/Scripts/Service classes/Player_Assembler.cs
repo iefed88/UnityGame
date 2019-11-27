@@ -17,8 +17,8 @@ public class Player_Assembler : MonoBehaviour
     public GameObject Player_Creator(string s) // вызывается из игрового уровня   
     {
         _player = Resources.Load<GameObject>(s) as GameObject;
-        LeftEye = Resources.Load<GameObject>("Forms/OpenEye") as GameObject;
-        RightEye = Resources.Load<GameObject>("Forms/OpenEye") as GameObject;
+        LeftEye = Resources.Load<GameObject>("Forms/NewLeftEye") as GameObject;
+        RightEye = Resources.Load<GameObject>("Forms/NewRightEye") as GameObject;
         LeftFoot = Resources.Load<GameObject>("Forms/LeftFoot") as GameObject;
         RightFoot = Resources.Load<GameObject>("Forms/RightFoot") as GameObject;
 
