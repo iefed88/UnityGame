@@ -9,7 +9,7 @@ public sealed class DiagonalEnemyMovement : EnemyMovement
     [SerializeField] private float FallInclination = 0.04f;
     public new void Start()
     {
-        level level_ = new level();
+        level level_ = GameObject.Find("ScriptHolder").GetComponent<level>();
         FallInclination = level_.levelFallInclination;
         base.Start();
         PrecalculatedDirection = FallInclination * fallingSpeed * (float)direction.GetRandom();

@@ -6,14 +6,10 @@ public class Timer : MonoBehaviour
 {
     public Text timerDisplay;
     public float timer { get; set; }
-    public Timer()
-    {
-        timer = ActiveLevelData.Timer;
-    }
-
     public void TurnOn()
     {
         gameObject.SetActive(true);
+        timer = ActiveLevelData.Timer;
     }
 
     void FixedUpdate()
