@@ -27,7 +27,7 @@ static class ActiveLevelData
     public static int PointsSubtractionAmount { get; private set; }
     public static int DiamondsSubtractAmount { get; private set; }
     public static int DifficultyIncreaseStep { get; private set; }
-    public static int Timer { get; private set; } = 120;
+    public static int Timer { get; private set; }
 
     public static void Set(LevelDataInput data)
     {

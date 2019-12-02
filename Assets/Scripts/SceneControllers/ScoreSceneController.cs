@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ScoreSceneController : BaseController
 {
-    private const byte buildIndex = 4;
+    [SerializeField] private byte buildIndex = 4;
 
     public Text scoreNumberDisplay;
     public Text diamondsNumberDisplay;
