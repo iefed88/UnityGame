@@ -8,10 +8,12 @@ public class SplittingEnemy : MonoBehaviour
     [SerializeField]
     private int SpawnNumber = 3;
     public GameObject ChildFigure;
-
+    private LevelSceneController thisSceneController;
     private Transform ThisTransform;
     void Start()
     {
+        GameObject ScriptHolder = GameObject.Find("ScriptHolder");
+        thisSceneController = ScriptHolder.GetComponent<LevelSceneController>();
         SplitPosition = Mathf.Clamp(SplitPosition, -3.5f, 5.5f);
         ThisTransform = gameObject.transform;
     }
@@ -24,6 +26,7 @@ public class SplittingEnemy : MonoBehaviour
                 Instantiate(ChildFigure, ThisTransform.position, Quaternion.identity);
             }
             Destroy(gameObject);
+            thisSceneController.IncrementEnemyCounter(2);
         }
     }
 }

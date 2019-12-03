@@ -1,5 +1,5 @@
 ﻿using System;
-enum StepType : byte // перечисление для настроек шага рандомизатора времени появления врагов
+public enum StepType : byte // перечисление для настроек шага рандомизатора времени появления врагов
 {
     FloatStep = 0,
     StaticStep,

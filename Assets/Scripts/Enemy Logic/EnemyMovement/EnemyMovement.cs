@@ -6,8 +6,11 @@ public abstract class EnemyMovement : MonoBehaviour
     private float destroyPosY;
     private (float min, float max) destroyPosX;
     protected float fallingSpeed;
+    private LevelSceneController thisSceneController;
     protected void Start()
     {
+        GameObject ScriptHolder = GameObject.Find("ScriptHolder");
+        thisSceneController = ScriptHolder.GetComponent<LevelSceneController>();
         fallingSpeed = ActiveLevelData.FallingSpeed;
         destroyPosY = ScreenBorders.Buttom + ScreenBorders.Buttom / 10;
         destroyPosX = (ScreenBorders.Left - ScreenBorders.Left / 10, ScreenBorders.Right + ScreenBorders.Right / 10);
@@ -28,10 +31,12 @@ public abstract class EnemyMovement : MonoBehaviour
         if (transform.localPosition.y < destroyPosY)
         {
             Destroy(gameObject);
+            thisSceneController.DecrementEnemyCounter();
         }
         if (transform.localPosition.x > destroyPosX.max || transform.localPosition.x < destroyPosX.min)
         {
             Destroy(gameObject);
+            thisSceneController.DecrementEnemyCounter();
         }
     }
 }

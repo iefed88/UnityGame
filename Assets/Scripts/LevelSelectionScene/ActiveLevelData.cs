@@ -44,38 +44,4 @@ static class ActiveLevelData
         DifficultyIncreaseStep = data.DifficultyIncreaseStep;
         Timer = data.Timer;
     }
-    public static float GetNewSpawnInterval(StepType stepType) // TODO: почему это тут
-    {
-        if (stepType == StepType.NoStep)
-        {
-            return EnemySpawnInterval;
-        }
-        int i = Random.Range(0, 2);
-        if (stepType == StepType.FloatStep)
-        {
-            if (i == 0)
-            { 
-                return EnemySpawnInterval += Random.Range(0, SpawnIntervalStep);
-            }
-            else
-            {
-                return EnemySpawnInterval -= Random.Range(0, SpawnIntervalStep);
-            }
-        }
-        else
-        {
-            if (i == 0)
-            {
-                return EnemySpawnInterval += SpawnIntervalStep;
-            }
-            else
-            {
-                return EnemySpawnInterval -= SpawnIntervalStep;
-            }
-        }
-    }
-    public static float GetNewSpawnInterval(StepType stepType, float delta)
-    {
-        return GetNewSpawnInterval(stepType) - delta;
-    }
 }

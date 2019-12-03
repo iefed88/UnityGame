@@ -1340,6 +1340,7 @@ MonoBehaviour:
   localTimer: {fileID: 1046821810}
   timer: {fileID: 1046821810}
   TimerReplacementText: {fileID: 1846552778}
+  EnemyCreator: {fileID: 1395036227}
 --- !u!114 &1395036226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,7 +1362,7 @@ MonoBehaviour:
   pointsFigureSpawnMultiplier: 25
   PointsSubtractionAmount: 20
   DiamondsSubtractAmount: 0
-  DifficultyIncreaseStep: 30
+  DifficultyIncreaseStep: 10
   Timer: 10
 --- !u!114 &1395036227
 MonoBehaviour:
@@ -1375,17 +1376,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916b0f76fd9ae1641b8023de27e9aba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube_enemy: {fileID: 8842911635074811912, guid: 07fa8520f0c43134b8c7db8d22425d25,
+  enemyA: {fileID: 8935892655870133375, guid: ddd69b42ef46cd24397df688b8ff8210, type: 3}
+  enemyASpawnChance: 10
+  enemyB: {fileID: 8842911635074811912, guid: 07fa8520f0c43134b8c7db8d22425d25, type: 3}
+  enemyBSpawnChance: 20
+  enemyC: {fileID: 1550654925732726866, guid: 75c6055b2b166fc45885327c1332d709, type: 3}
+  enemyCSpawnChance: 30
+  enemyD: {fileID: 2443867936017225212, guid: c565e46be0b51dc43960c8826c5771e5, type: 3}
+  enemyDSpawnChance: 40
+  enemyE: {fileID: 0}
+  enemyESpawnChance: 0
+  PointsFigure: {fileID: 2073581005837902107, guid: f04bdde686c0ffd42b153cce56391174,
     type: 3}
-  sphere_enemy: {fileID: 8930868702727515543, guid: 6b8808df5988af34a82609e363dcafca,
+  PointsFigureSpawnChance: 0
+  DiamondFigure: {fileID: 5552273120672060707, guid: 3cb7bd1a3e565d145a75fe2e8b5fc894,
     type: 3}
-  cylinder_enemy: {fileID: 2443867936017225212, guid: c565e46be0b51dc43960c8826c5771e5,
-    type: 3}
-  cone_enemy: {fileID: 1550654925732726866, guid: 75c6055b2b166fc45885327c1332d709,
-    type: 3}
-  points_figure: {fileID: 2073581005837902107, guid: f04bdde686c0ffd42b153cce56391174,
-    type: 3}
-  Diamond: {fileID: 5552273120672060707, guid: 3cb7bd1a3e565d145a75fe2e8b5fc894, type: 3}
+  DiamondFigureSpawnChance: 0
+  isActive: 0
   stepType: 1
 --- !u!114 &1395036228
 MonoBehaviour:

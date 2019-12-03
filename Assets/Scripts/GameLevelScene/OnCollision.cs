@@ -29,6 +29,7 @@ public class OnCollision : MonoBehaviour // Класс слишком больш
             Destroy(col.gameObject);
             PopUp.OnCollision(gameObject.transform.position);
             sizeChange.ChangeSize();
+            thisSceneController.DecrementEnemyCounter();
         }
 
         else if (col.gameObject.CompareTag("transparent"))
@@ -41,6 +42,7 @@ public class OnCollision : MonoBehaviour // Класс слишком больш
             SceneController.diamonds++;
             Destroy(col.gameObject);
             sizeChange.ChangeSize();
+            thisSceneController.DecrementEnemyCounter();
         }      
     }
 
