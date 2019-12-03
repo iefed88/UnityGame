@@ -19,7 +19,7 @@ public class PauseButton : MonoBehaviour
             PauseClick = true;
             ScreenBlur.SetActive(true);
             blurTransparencyChange.ButtonClicked = !blurTransparencyChange.ButtonClicked;
-            if (activeScene.buildIndex > 5)
+            if (activeScene.buildIndex > 7)
             {
                 Time.timeScale = 0.0f;
                 AndroidControlls.GameIsPaused = true;
@@ -30,7 +30,7 @@ public class PauseButton : MonoBehaviour
         {
             PauseClick = false;
             blurTransparencyChange.ButtonClicked = !blurTransparencyChange.ButtonClicked;
-            if (activeScene.buildIndex > 5)
+            if (activeScene.buildIndex > 7)
             {
                 Time.timeScale = 1.0f;
                 AndroidControlls.GameIsPaused = false;

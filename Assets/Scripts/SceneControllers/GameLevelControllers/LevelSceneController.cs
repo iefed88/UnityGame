@@ -9,6 +9,7 @@ public class LevelSceneController : BaseController
     public IPriceDictionary Dictionary;
     public LevelDataInput currentLevelData;
     [SerializeField] Timer localTimer;
+    public Enemy_Creator EnemyCreator;
 
     public ScoreGainedOnLevel ScoreGainedOnLevel { get; private set; }
 
@@ -33,6 +34,15 @@ public class LevelSceneController : BaseController
     public void OnDisable()
     {
         ScoreGainedOnLevel.Reset(localTimer.timer);
+    }
+    public void DecrementEnemyCounter()
+    {
+        EnemyCreator.EnemyCounter--;
+    }
+
+    public void IncrementEnemyCounter(sbyte times = 1)
+    {
+        EnemyCreator.EnemyCounter += times;
     }
 }
 

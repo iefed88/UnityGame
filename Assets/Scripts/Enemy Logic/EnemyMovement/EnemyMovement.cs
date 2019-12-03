@@ -5,9 +5,12 @@ public abstract class EnemyMovement : MonoBehaviour
     [SerializeField] protected int rotationSpeed = 1;
     private (float min, float max) destroyPosY;
     private (float min, float max) destroyPosX;
-    [SerializeField] protected float fallingSpeed;
+    protected float fallingSpeed;
+    private LevelSceneController thisSceneController;
     protected void Start()
     {
+        GameObject ScriptHolder = GameObject.Find("ScriptHolder");
+        thisSceneController = ScriptHolder.GetComponent<LevelSceneController>();
         fallingSpeed = ActiveLevelData.FallingSpeed;
         destroyPosY = (ScreenBorders.Buttom + ScreenBorders.Buttom / 10, ScreenBorders.Top + ScreenBorders.Top / 10);
         destroyPosX = (ScreenBorders.Left - ScreenBorders.Left / 10, ScreenBorders.Right + ScreenBorders.Right / 10);
@@ -23,11 +26,16 @@ public abstract class EnemyMovement : MonoBehaviour
 
     public virtual void Destroy() // TODO: ок, а есть ли еще более оптимальный способ?
     {
-        if (transform.localPosition.y < destroyPosY.min || transform.localPosition.y > destroyPosY.max || 
-            transform.localPosition.x > destroyPosX.max || transform.localPosition.x < destroyPosX.min)
+        if (transform.localPosition.y < destroyPosY)
+        {
+            Destroy(gameObject);
+            thisSceneController.DecrementEnemyCounter();
+        }
+        if (transform.localPosition.x > destroyPosX.max || transform.localPosition.x < destroyPosX.min)
         {
             ActiveLevelData.EnemiesOnLevel--;
             Destroy(gameObject);
+            thisSceneController.DecrementEnemyCounter();
         }
     }
 }

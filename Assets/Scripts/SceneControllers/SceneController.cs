@@ -9,12 +9,12 @@ public class SceneController : BaseController
     public static string lastForm;
     public static string LastLevel;
     public static float r,g,b; // TODO: убрать, заменить на доступ через PlayerCurrentColor
-    // словари для хранения данных для сущностей которые могут быть открыты/закрыты (уровни, цвета)
     public static Color PlayerCurrentColor // cвойство с текущим цветом игрока
     {
         get { return new Color(r, g, b); }
         set { r = value.r; g = value.g; b = value.b; }
     }
+    // словари для хранения данных для сущностей которые могут быть открыты/закрыты (уровни, цвета)
     public static LevelOpenCloseDictionary LevelStateDictionary { get; private set; }
     public static СolorOpenCloseDictionary ColorStateDictionary { get; private set; }
     // словари для хранения цен разблокировки

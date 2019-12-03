@@ -17,8 +17,7 @@ static class ActiveLevelData
     public static int PointsSubtractionAmount { get; private set; }
     public static int DiamondsSubtractAmount { get; private set; }
     public static int DifficultyIncreaseStep { get; private set; }
-    public static int Timer { get; private set; } = 120;
-    public static int EnemiesOnLevel { get => enemiesOnLevel; set => enemiesOnLevel = (value < 0) ? 0 : value; }
+    public static int Timer { get; private set; }
 
     public static void Set(LevelDataInput data)
     {
@@ -35,39 +34,5 @@ static class ActiveLevelData
         DifficultyIncreaseStep = data.DifficultyIncreaseStep;
         Timer = data.Timer;
         EnemiesOnLevel = 0;
-    }
-    public static float GetNewSpawnInterval(StepType stepType) // TODO: почему это тут
-    {
-        if (stepType == StepType.NoStep)
-        {
-            return EnemySpawnInterval;
-        }
-        int i = Random.Range(0, 2);
-        if (stepType == StepType.FloatStep)
-        {
-            if (i == 0)
-            { 
-                return EnemySpawnInterval += Random.Range(0, SpawnIntervalStep);
-            }
-            else
-            {
-                return EnemySpawnInterval -= Random.Range(0, SpawnIntervalStep);
-            }
-        }
-        else
-        {
-            if (i == 0)
-            {
-                return EnemySpawnInterval += SpawnIntervalStep;
-            }
-            else
-            {
-                return EnemySpawnInterval -= SpawnIntervalStep;
-            }
-        }
-    }
-    public static float GetNewSpawnInterval(StepType stepType, float delta)
-    {
-        return GetNewSpawnInterval(stepType) - delta;
     }
 }
