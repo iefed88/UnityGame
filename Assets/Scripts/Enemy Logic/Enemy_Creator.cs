@@ -1,30 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
-class Enemy_Creator : EnemySpawnRandomizer 
+public sealed class Enemy_Creator : EnemySpawnRandomizer 
 {
-    private const byte MaxEnemies = 30;
-    // фигуры врагов для копирования
-#pragma warning disable 649
-    public GameObject cube_enemy;
-#pragma warning disable 649
-    public GameObject sphere_enemy;
-#pragma warning disable 649
-    public GameObject cylinder_enemy;
-#pragma warning disable 649
-    public GameObject cone_enemy;
-#pragma warning disable 649
-    public GameObject points_figure;
-#pragma warning disable 649
-    public GameObject Diamond;
-    // лист для фигур со стандартным поведением, то есть просто падающих вниз, для выбора, после выбора по шансам фигур специального поведения
-    private List<GameObject> StandardBehaviorEnemy;
-    // переменные для контроля уровня сложност
+    // фигуры врагов и шанс их появления
+    [SerializeField] private GameObject enemyA;
+    [SerializeField] private int enemyASpawnChance;
+    [SerializeField] private GameObject enemyB;
+    [SerializeField] private int enemyBSpawnChance;
+    [SerializeField] private GameObject enemyC;
+    [SerializeField] private int enemyCSpawnChance;
+    [SerializeField] private GameObject enemyD;
+    [SerializeField] private int enemyDSpawnChance;
+    [SerializeField] private GameObject enemyE;
+    [SerializeField] private int enemyESpawnChance;
+    [SerializeField] private GameObject PointsFigure;
+    [SerializeField] private int PointsFigureSpawnChance;
+    [SerializeField] private GameObject DiamondFigure;
+    [SerializeField] private int DiamondFigureSpawnChance;
+    // словарь всех фигур на уровне
+    private Dictionary<GameObject, int> AllFigures;
+    // переменные для контроля уровня сложности
     // контроль частоты появления фигур
+    public bool isActive = false;
     public static float spawnInterval;
     private float timeCount = 0;
 
-    private byte EnemyCounter = 0; // я не очень понимаю, зачем нужна эта переменная
+    public sbyte EnemyCounter = 0;
 
     public StepType stepType = StepType.FloatStep;
 
@@ -32,60 +33,93 @@ class Enemy_Creator : EnemySpawnRandomizer
     private float spawnPosY;
 
     private float[] positionArray;
+
+    private float EnemySpawnInterval;
+    private float SpawnIntervalStep;
     private void Start()
     {
-        StandardBehaviorEnemy = new List<GameObject> { cube_enemy, cylinder_enemy, cone_enemy, sphere_enemy };
-        spawnInterval = ActiveLevelData.GetNewSpawnInterval(stepType);
+        AllFigures = new Dictionary<GameObject, int>
+        {
+        { PointsFigure, 0 + PointsFigureSpawnChance },
+        { DiamondFigure, PointsFigureSpawnChance + DiamondFigureSpawnChance },
+        { enemyA, PointsFigureSpawnChance + DiamondFigureSpawnChance + enemyASpawnChance },
+        { enemyB, PointsFigureSpawnChance + DiamondFigureSpawnChance + enemyASpawnChance + enemyBSpawnChance },
+        { enemyC, PointsFigureSpawnChance + DiamondFigureSpawnChance + enemyASpawnChance + enemyBSpawnChance + enemyCSpawnChance },
+        { enemyD, PointsFigureSpawnChance + DiamondFigureSpawnChance + enemyASpawnChance + enemyBSpawnChance + enemyCSpawnChance + enemyDSpawnChance },
+        { enemyE,PointsFigureSpawnChance + DiamondFigureSpawnChance + enemyASpawnChance + enemyBSpawnChance + enemyCSpawnChance + enemyDSpawnChance + enemyESpawnChance }
+        };
+
+        spawnInterval = GetNewSpawnInterval(stepType);
         spawnPosY = ScreenBorders.Top + ScreenBorders.Top / 10;
-        positionArray = SpawnPositionCalculator();    
+        positionArray = SpawnPositionCalculator();
+        EnemySpawnInterval = ActiveLevelData.EnemySpawnInterval;
+        SpawnIntervalStep = ActiveLevelData.SpawnIntervalStep;
     }
     void Update()
     {
-        timeCount += Time.deltaTime;
-        if (timeCount > spawnInterval)
+        if (isActive)
         {
-            Enemy_Spawner();
-            ++EnemyCounter;
-            timeCount = default;
-            if (EnemyCounter >= ActiveLevelData.DifficultyIncreaseStep)
+            timeCount += Time.deltaTime;
+            if (timeCount > spawnInterval)
             {
-                spawnInterval = ActiveLevelData.GetNewSpawnInterval(stepType, ActiveLevelData.SpawnIntervalStep);
-                EnemyCounter = default;
+                Enemy_Spawner();
+                ++EnemyCounter;
+                timeCount = default;
+                if (EnemyCounter >= ActiveLevelData.DifficultyIncreaseStep)
+                {
+                    spawnInterval = GetNewSpawnInterval(stepType, ActiveLevelData.SpawnIntervalStep);
+                    EnemyCounter = default;
+                }
+                else
+                    spawnInterval = GetNewSpawnInterval(stepType);
             }
-            else
-                spawnInterval = ActiveLevelData.GetNewSpawnInterval(stepType);
         }
     }
     public void Enemy_Spawner()
     {
-        if (EnemyCalculator())
-            Instantiate(Figure_Randomiser(), new Vector3(Position_Randomizer(positionArray), spawnPosY, 0), Quaternion.identity);
+        int i = Random.Range(0, 100);
+        foreach (var enemy in AllFigures)
+        {
+            if (enemy.Key != null && i < enemy.Value)
+            {
+                Instantiate(enemy.Key, new Vector3(Position_Randomizer(positionArray), spawnPosY, 0), Quaternion.identity);
+                return;
+            }
+        }     
     }
-    private bool EnemyCalculator()
+    public float GetNewSpawnInterval(StepType stepType)
     {
-        if (ActiveLevelData.EnemiesOnLevel <= MaxEnemies)
+        if (stepType == StepType.NoStep)
         {
-            ActiveLevelData.EnemiesOnLevel++;
-            return true;
+            return EnemySpawnInterval;
         }
-        else return false;
-    }
-
-    GameObject Figure_Randomiser()
-    {
-        if (SpawnChance.Get(ActiveLevelData.PointsFigureSpawnMultiplier))
+        int i = Random.Range(0, 2);
+        if (stepType == StepType.FloatStep)
         {
-            return points_figure;
-        }
-        else if (SpawnChance.Get(ActiveLevelData.DiamondSpawnMultiplier))
-        {
-            return Diamond;
+            if (i == 0)
+            {
+                return EnemySpawnInterval += Random.Range(0, SpawnIntervalStep);
+            }
+            else
+            {
+                return EnemySpawnInterval -= Random.Range(0, SpawnIntervalStep);
+            }
         }
         else
         {
-            int i = Random.Range(0, StandardBehaviorEnemy.Count);
-            return StandardBehaviorEnemy[i] ?? cube_enemy;
+            if (i == 0)
+            {
+                return EnemySpawnInterval += SpawnIntervalStep;
+            }
+            else
+            {
+                return EnemySpawnInterval -= SpawnIntervalStep;
+            }
         }
+    }
+    public float GetNewSpawnInterval(StepType stepType, float delta)
+    {
+        return GetNewSpawnInterval(stepType) - delta;
     }
 }
 

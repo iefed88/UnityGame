@@ -21,4 +21,5 @@ public class EnemySpawnRandomizer : MonoBehaviour
         float position = spawnPosition[pos];
         return position;
     }
+
 }

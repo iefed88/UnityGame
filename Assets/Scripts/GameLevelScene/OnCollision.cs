@@ -30,6 +30,7 @@ public class OnCollision : MonoBehaviour // TODO: Класс слишком бо
             Destroy(col.gameObject);
             PopUp.OnCollision(gameObject.transform.position);
             sizeChange.ChangeSize();
+            thisSceneController.DecrementEnemyCounter();
         }
 
         else if (col.gameObject.CompareTag("transparent"))
@@ -44,6 +45,7 @@ public class OnCollision : MonoBehaviour // TODO: Класс слишком бо
             ActiveLevelData.EnemiesOnLevel--;
             Destroy(col.gameObject);
             sizeChange.ChangeSize();
+            thisSceneController.DecrementEnemyCounter();
         }      
     }
 
