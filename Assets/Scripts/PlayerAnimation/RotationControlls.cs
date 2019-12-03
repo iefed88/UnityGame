@@ -2,7 +2,7 @@
 
 public class RotationControlls : MonoBehaviour
 {
-    public float rotationSpeed = 5;
+    [SerializeField] private float rotationSpeed = 5;
 
     void Update()
     {

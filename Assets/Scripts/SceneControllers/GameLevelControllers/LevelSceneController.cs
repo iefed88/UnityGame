@@ -21,7 +21,8 @@ public class LevelSceneController : BaseController
         buildIndex = index;
         Dictionary = new ContinuePlayingDictionary();
     }
-    protected void BaseStart()
+
+    public void Start()
     {
         thisSetActive(buildIndex); //установка данной сцены активной методом из наследуемого класса
         ActiveLevelData.Set(currentLevelData);
@@ -29,7 +30,6 @@ public class LevelSceneController : BaseController
         ScoreGainedOnLevel = new ScoreGainedOnLevel();
         if (ActiveLevelData.TimerIsNeeded) localTimer.TurnOn();
     }
-
     public void OnDisable()
     {
         ScoreGainedOnLevel.Reset(localTimer.timer);
