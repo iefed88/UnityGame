@@ -26,6 +26,7 @@ public class LevelSceneController : BaseController
     {
         thisSetActive(buildIndex); //установка данной сцены активной методом из наследуемого класса
         ActiveLevelData.Set(currentLevelData);
+        Debug.Log(ActiveLevelData.Timer);
         Player = _Player_Assembler.Player_Creator(SceneController.lastForm);
         ScoreGainedOnLevel = new ScoreGainedOnLevel();
         if (ActiveLevelData.TimerIsNeeded) localTimer.TurnOn();

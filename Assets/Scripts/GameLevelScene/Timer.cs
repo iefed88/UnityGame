@@ -6,6 +6,7 @@ public sealed class Timer : MonoBehaviour
 {
     public event Action TimerEnded;
     public Text timerDisplay;
+
     public float timer { get; private set; }
 
     public void TurnOn()
@@ -17,6 +18,7 @@ public sealed class Timer : MonoBehaviour
     public void TurnOff()
     {
         gameObject.SetActive(true);
+        timer = ActiveLevelData.Timer;
     }
 
     void FixedUpdate()
