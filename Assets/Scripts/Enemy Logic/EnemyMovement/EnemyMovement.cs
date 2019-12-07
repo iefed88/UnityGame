@@ -26,14 +26,13 @@ public abstract class EnemyMovement : MonoBehaviour
 
     public virtual void Destroy() // TODO: ок, а есть ли еще более оптимальный способ?
     {
-        if (transform.localPosition.y < destroyPosY)
+        if (transform.localPosition.y < destroyPosY.min || transform.localPosition.y > destroyPosY.max)
         {
             Destroy(gameObject);
             thisSceneController.DecrementEnemyCounter();
         }
         if (transform.localPosition.x > destroyPosX.max || transform.localPosition.x < destroyPosX.min)
         {
-            ActiveLevelData.EnemiesOnLevel--;
             Destroy(gameObject);
             thisSceneController.DecrementEnemyCounter();
         }

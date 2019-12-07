@@ -9,9 +9,9 @@ public class Level_1_Controller : LevelSceneController
     public Level_1_Controller() : base(/*buildindex =*/ 8, levelName) { }
     private bool levelIsEnding = false;
 
-    void Start()
+    new void Start()
     {
-        BaseStart();
+        base.Start();
         SceneController.LastLevel = levelName;        // перезапись последнего уровня в который играл игрок
         timer.TimerEnded += new Action(TimerAtZero);
         // подписка на событие окончания вступительного текста += new Action(LevelStartTextEnded);
@@ -20,7 +20,6 @@ public class Level_1_Controller : LevelSceneController
 
     public void Update()
     {
-        Debug.Log(EnemyCreator.EnemyCounter);
         if (levelIsEnding & EnemyCreator.EnemyCounter <= 0)
         {
             SceneLoad("WinScore");

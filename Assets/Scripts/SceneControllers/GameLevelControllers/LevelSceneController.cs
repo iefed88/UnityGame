@@ -21,15 +21,13 @@ public class LevelSceneController : BaseController
         buildIndex = index;
         Dictionary = new ContinuePlayingDictionary();
     }
-
-    public void Start()
+    protected void Start()
     {
         thisSetActive(buildIndex); //установка данной сцены активной методом из наследуемого класса
         ActiveLevelData.Set(currentLevelData);
-        Debug.Log(ActiveLevelData.Timer);
         Player = _Player_Assembler.Player_Creator(SceneController.lastForm);
         ScoreGainedOnLevel = new ScoreGainedOnLevel();
-        if (ActiveLevelData.TimerIsNeeded) localTimer.TurnOn();
+        localTimer.TurnOn();
     }
     public void OnDisable()
     {
@@ -40,9 +38,9 @@ public class LevelSceneController : BaseController
         EnemyCreator.EnemyCounter--;
     }
 
-    public void IncrementEnemyCounter(sbyte times = 1)
+    public void IncrementEnemyCounter(sbyte amount = 1)
     {
-        EnemyCreator.EnemyCounter += times;
+        EnemyCreator.EnemyCounter += amount;
     }
 }
 

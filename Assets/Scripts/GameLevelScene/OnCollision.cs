@@ -26,7 +26,6 @@ public class OnCollision : MonoBehaviour // TODO: Класс слишком бо
         else if (col.gameObject.CompareTag("pointsgiver"))
         {
             thisSceneController.ScoreGainedOnLevel.Add(/*pointsAdded =*/ 10);
-            ActiveLevelData.EnemiesOnLevel--;
             Destroy(col.gameObject);
             PopUp.OnCollision(gameObject.transform.position);
             sizeChange.ChangeSize();
@@ -36,13 +35,12 @@ public class OnCollision : MonoBehaviour // TODO: Класс слишком бо
         else if (col.gameObject.CompareTag("transparent"))
         {
             SetEffect(col.gameObject);
-            ActiveLevelData.EnemiesOnLevel--;
+            thisSceneController.DecrementEnemyCounter();
         }
 
         else if (col.gameObject.CompareTag("collectible"))
         {
             SceneController.diamonds++;
-            ActiveLevelData.EnemiesOnLevel--;
             Destroy(col.gameObject);
             sizeChange.ChangeSize();
             thisSceneController.DecrementEnemyCounter();
