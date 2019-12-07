@@ -4,7 +4,7 @@ static class ActiveLevelData
 {
     private static float fallingSpeed;
     private static float spawnIntervalStep; //TODO: разобраться что за хрень
-    private static int enemiesOnLevel;
+    //private static int EnemiesOnLevel;
 
     public static float FallingSpeed { get => -fallingSpeed; }
     public static bool TimerIsNeeded { get; private set; }
@@ -33,6 +33,6 @@ static class ActiveLevelData
         DiamondsSubtractAmount = data.DiamondsSubtractAmount;
         DifficultyIncreaseStep = data.DifficultyIncreaseStep;
         Timer = data.Timer;
-        EnemiesOnLevel = 0;
+        //EnemiesOnLevel = 0;
     }
 }
